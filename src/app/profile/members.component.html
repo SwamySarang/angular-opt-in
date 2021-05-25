@@ -7,7 +7,7 @@
       aria-controls="collapseMembers"
     >
       Dependents
-      <span class="badge bg-primary">{{ members?.length }}</span>
+      <span class="badge bg-primary">{{ membersLength }}</span>
     </button>
     <button
       class="m-1 btn btn-secondary"
@@ -18,7 +18,7 @@
     </button>
   </div>
   <div class="card-body" [collapse]="isCollapsed" id="collapseMembers">
-    <div class="card-header" *ngIf="members?.length > 0">
+    <div class="card-header" *ngIf="membersLength > 0">
       <div class="row">
         <div class="col-2">
           <div class="p-0 m-1">
@@ -57,7 +57,7 @@
         </div>
       </div>
     </div>
-    <div *ngFor="let member of members; let i = index">
+    <div *ngFor="let member of employee.members; let i = index">
       <div class="row g-1" (click)="editDependent($event, i)">
         <div class="col-2">
           <div class="p-0 m-1 border bg-light">

@@ -5,8 +5,12 @@ import {
   Member,
   VXN_TYPES,
   VXN_LOCATION_PREFERENCE,
-  RELATION_TYPES, GENDER,
-  SCHEDULE_GROUP_TYPES, DOSE_TYPES, SCHEDULE_DAY_TYPES, SCHEDULE_SLOT_TYPES
+  RELATION_TYPES,
+  GENDER,
+  SCHEDULE_GROUP_TYPES,
+  DOSE_TYPES,
+  SCHEDULE_DAY_TYPES,
+  SCHEDULE_SLOT_TYPES
 } from './../employees';
 
 @Component({
@@ -18,20 +22,24 @@ export class ModalComponent implements OnInit {
   // input data from Modal Consumers
   @Input() member?: Member;
   @Input() mode?: string;
-  @Input() empDay?: string;
+  @Input() empRegisteredDay?: string;
 
   public event: EventEmitter<Member> = new EventEmitter();
+  enableSlots: boolean = false;
 
   // list of values for the select elements (vaccine preference and vaccine location preference
   relationTypes = Object.values(RELATION_TYPES);
   vxnPrefs = Object.values(VXN_TYPES);
-  doses =  Object.values(DOSE_TYPES);
+  doses = Object.values(DOSE_TYPES);
   days = Object.values(SCHEDULE_DAY_TYPES);
   slots = Object.values(SCHEDULE_SLOT_TYPES);
 
   // Reactive Form elements
   dependentForm = new FormGroup({
-    relationType: new FormControl('Select', [Validators.required, Validators.minLength(4)]),
+    relationType: new FormControl('Select', [
+      Validators.required,
+      Validators.minLength(4)
+    ]),
     name: new FormControl('', Validators.required),
     age: new FormControl('', Validators.required),
     vxnType: new FormControl('Select', Validators.required),
@@ -44,16 +52,25 @@ export class ModalComponent implements OnInit {
   constructor(private bsModalRef: BsModalRef) {}
 
   ngOnInit() {
-    console.log("modal mode ", this.mode);
+    console.log(
+      'modal mode ',
+      this.mode,
+      ', empRegisteredDay',
+      this.empRegisteredDay
+    );
     if (this.mode === 'add') {
     } else if (this.mode === 'edit') {
-      this.dependentForm.controls.relationType.setValue(this.member?.relationType);
-      this.dependentForm.controls.name.setValue(this.member?.name);
-      this.dependentForm.controls.age.setValue(this.member?.age);
-      this.dependentForm.controls.vxnType.setValue(this.member?.vxnType);
-      this.dependentForm.controls.dose.setValue(this.member?.dose);
-      this.dependentForm.controls.day.setValue(this.member?.day);
-      this.dependentForm.controls.slot.setValue(this.member?.slot);
+      if (this.member !== undefined) {
+        this.dependentForm.controls.relationType.setValue(
+          this.member.relationType
+        );
+        this.dependentForm.controls.name.setValue(this.member.name);
+        this.dependentForm.controls.age.setValue(this.member.age);
+        this.dependentForm.controls.vxnType.setValue(this.member.vxnType);
+        this.dependentForm.controls.dose.setValue(this.member.dose);
+        this.dependentForm.controls.day.setValue(this.member.day);
+        this.dependentForm.controls.slot.setValue(this.member.slot);
+      }
     }
   }
 
@@ -62,6 +79,7 @@ export class ModalComponent implements OnInit {
     //   'this.relationType ',
     //   this.dependentForm.controls.relationType.value
     // );
+    this.onDayChange(event);
   }
 
   onVaccinePreferenceChange(event: Event) {
@@ -85,6 +103,35 @@ export class ModalComponent implements OnInit {
     // );
   }
 
+  onDayChange(event: Event) {
+    console.log('self day: ', this.dependentForm.controls.day.value);
+    console.log(
+      'dependent day: ',
+      this.dependentForm.controls.day.value,
+      ', self day: ',
+      this.empRegisteredDay
+    );
+    if (
+      !(
+        this.dependentForm.controls.relationType.value === 'Self' ||
+        this.dependentForm.controls.relationType.value === 'Select'
+      ) &&
+      this.dependentForm.controls.day.value === this.empRegisteredDay
+    ) {
+      // allow same slots for a dependent only day is the same
+      this.enableSlots = true;
+    } else {
+      this.enableSlots = false;
+    }
+  }
+
+  onSlotChange(event: Event) {
+    // console.log(
+    //   'this.locationType ',
+    //   this.dependentForm.controls.locationType.value
+    // );
+  }
+
   onDependentSubmit(event: Event) {
     // console.log(this.dependentForm, this.dependentForm.value);
     this.bsModalRef.hide();
@@ -93,13 +140,19 @@ export class ModalComponent implements OnInit {
 
   private extractMember(dependentFormValue: any): Member {
     let member: Member = {
-      relationType: dependentFormValue.relationType as RELATION_TYPES,
+      relationType:
+        dependentFormValue.relationType !== 'Select'
+          ? dependentFormValue.relationType
+          : '',
       name: dependentFormValue.name as string,
       age: dependentFormValue.age as number,
-      vxnType: dependentFormValue.vxnType as VXN_TYPES,
-      dose: dependentFormValue.dose as DOSE_TYPES,
-      day: dependentFormValue.day as SCHEDULE_DAY_TYPES,
-      slot: dependentFormValue.slot as SCHEDULE_SLOT_TYPES,
+      vxnType:
+        dependentFormValue.vxnType !== 'Select'
+          ? dependentFormValue.vxnType
+          : '',
+      dose: dependentFormValue.dose !== 'Select' ? dependentFormValue.dose : '',
+      day: dependentFormValue.day !== 'Select' ? dependentFormValue.day : '',
+      slot: dependentFormValue.slot !== 'Select' ? dependentFormValue.slot : ''
     };
 
     return member;

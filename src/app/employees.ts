@@ -99,8 +99,21 @@ export const employee: Employee = {
   slot: SCHEDULE_SLOT_TYPES.SAME_SLOT,
   members: [
     {
-      relationType: RELATION_TYPES.FATHER,
+      relationType: RELATION_TYPES.SELF,
       name: 'John Galt',
+      gender: GENDER.MALE,
+      dose: DOSE_TYPES.DOSE_2,
+      aadhaarNo: 1234 - 1234 - 1234,
+      age: 55,
+      location: 'Bangalore',
+      vxnType: VXN_TYPES.COVAXIN,
+      locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
+      day: SCHEDULE_DAY_TYPES.DAY_1,
+      slot: SCHEDULE_SLOT_TYPES.DIFF_SLOT
+    },
+    {
+      relationType: RELATION_TYPES.FATHER,
+      name: 'Matt Galt',
       gender: GENDER.MALE,
       dose: DOSE_TYPES.DOSE_2,
       aadhaarNo: 1234 - 1234 - 1234,

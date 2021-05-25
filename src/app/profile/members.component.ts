@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Employee, Member } from './../employees';
+import { Employee, Member, RELATION_TYPES } from './../employees';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ModalComponent } from '../modal/modal.component';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -15,22 +15,29 @@ export class MembersComponent implements OnInit {
   // fontawesome icons
   faTrash = faTrashAlt;
 
+  membersLength?: number;
   isCollapsed = false;
   bsModalRef?: BsModalRef;
-  //newlyAdded = false;
-  //confirmNew = '';
 
   constructor(private modalService: BsModalService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.employee !== undefined && this.employee.members !== undefined) {
+      this.membersLength = this.employee.members.length;
+    }
+  }
 
   editDependent(event: Event, idx: number) {
-    if (this.employee?.members != null) {
-      let members = this.employee?.members;
+    if (this.employee !== undefined && this.employee.members !== undefined) {
+      let members = this.employee.members;
+      let selfDetails = this.employee.members.find(
+        member => member.relationType === RELATION_TYPES.SELF
+      ) as Member;
+
       const initialState = {
         member: members[idx],
         mode: 'edit',
-        empDay: this.employee?.day
+        empRegisteredDay: selfDetails?.day
       };
       this.bsModalRef = this.modalService.show(ModalComponent, {
         class: 'modal-lg',
@@ -40,22 +47,27 @@ export class MembersComponent implements OnInit {
 
       // register for edit data
       this.bsModalRef.content.event.subscribe(newMember => {
-        if (this.employee?.members != null) {
-          members[idx].name = newMember.name;
-          members[idx].age = newMember.age;
-          members[idx].vxnType = newMember.vxnType;
-          members[idx].dose = newMember.dose;
-          members[idx].day = newMember.day;
-          members[idx].slot = newMember.slot;
-        }
+        members[idx].name = newMember.name;
+        members[idx].age = newMember.age;
+        members[idx].vxnType = newMember.vxnType;
+        members[idx].dose = newMember.dose;
+        members[idx].day = newMember.day;
+        members[idx].slot = newMember.slot;
       });
     }
   }
 
   addDependent() {
+    let empDay;
+    if (this.employee !== undefined && this.employee.members !== undefined) {
+      let selfDetails = this.employee.members.find(
+        member => member.relationType === RELATION_TYPES.SELF
+      ) as Member;
+      empDay = selfDetails?.day;
+    }
     const initialState = {
       mode: 'add',
-      empDay: this.employee?.day
+      empRegisteredDay: empDay
     };
     this.bsModalRef = this.modalService.show(ModalComponent, {
       class: 'modal-lg',
@@ -63,33 +75,35 @@ export class MembersComponent implements OnInit {
       initialState
     });
 
-      // register for new member data
+    // register for new member data
     this.bsModalRef.content.event.subscribe(member => {
-      // this.members?.push(member);
-      this.employee?.members?.unshift(member);
-      //this.newlyAdded = true;
+      if (this.employee !== undefined && this.employee.members !== undefined) {
+        this.employee.members.unshift(member);
+      }
     });
   }
 
   deleteDependent(event: Event, idx: number) {
     console.log('deleteDependent ', event, idx);
     event.stopPropagation();
-    this.employee?.members?.splice(idx, 1);
+    if (this.employee !== undefined && this.employee.members !== undefined) {
+      this.employee.members.splice(idx, 1);
+    }
   }
 
   isNewlyAdded(event: Event, idx: number): string {
-      // if (idx === 0 && this.newlyAdded) {
-      //   return 'lightgreen';
-      // } else {
-      //   return '';
-      // }
-      return ''
-      // this.confirmNew =  ;
-      // setTimeout(() => {
-      //   console.log("inside timeout ", this.newlyAdded);
-      //   this.newlyAdded = false;
-      //   this.confirmNew =  '';
-      //   console.log("inside timeout ", this.newlyAdded);
-      // }, 500);
+    // if (idx === 0 && this.newlyAdded) {
+    //   return 'lightgreen';
+    // } else {
+    //   return '';
+    // }
+    return '';
+    // this.confirmNew =  ;
+    // setTimeout(() => {
+    //   console.log("inside timeout ", this.newlyAdded);
+    //   this.newlyAdded = false;
+    //   this.confirmNew =  '';
+    //   console.log("inside timeout ", this.newlyAdded);
+    // }, 500);
   }
 }

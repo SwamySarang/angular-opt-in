@@ -97,15 +97,15 @@
           </div>
           <div class="col-7">
             <div class="p-0 m-1 border bg-light">
-              <label>Day:</label>
-              <select id="dayId" formControlName="day">
+              <label>Day<span *ngIf="enableSlots"> and Select Slot</span>:</label>
+              <select id="dayId" formControlName="day" (change)="onDayChange($event)">
                 <option value="Select">Select</option>
                 <option [value]="day" *ngFor="let day of days"
                   >{{ day }}</option
                 >
               </select>
-              <span class="p-1"></span>
-              <select id="slotId" formControlName="slot" *ngIf="empDay !== day">
+              <!--span class="p-1" *ngIf="enableSlots">Select Slot</span-->
+              <select id="slotId" class="p-0 m-2" formControlName="slot" *ngIf="enableSlots" (change)="onSlotChange($event)">>
                 <option value="Select">Select</option>
                 <option [value]="slot" *ngFor="let slot of slots"
                   >{{ slot }}</option
