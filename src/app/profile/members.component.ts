@@ -11,7 +11,7 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit {
-  @Input() members: Member[] = [];
+  @Input() members?: Member[];
 
   // fontawesome icons
   faTrash = faTrashAlt;
