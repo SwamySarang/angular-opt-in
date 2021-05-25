@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { Member } from './../employees';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ModalComponent } from '../modal/modal.component';
@@ -20,8 +19,6 @@ export class MembersComponent implements OnInit {
   bsModalRef?: BsModalRef;
   //newlyAdded = false;
   //confirmNew = '';
-
-  memberSelect = new FormControl('');
 
   constructor(private modalService: BsModalService) {}
 
