@@ -52,6 +52,13 @@ export enum SCHEDULE_DAY_TYPES {
   DAY_2 = 'Day 2'
 }
 
+export enum SCHEDULE_GROUP_TYPES {
+  GROUP_1 = 'Group 1',
+  GROUP_2 = 'Group 2',
+  GROUP_3 = 'Group 3',
+  GROUP_4 = 'Group 4'
+}
+
 export enum SCHEDULE_SLOT_TYPES {
   SLOT_1 = 'Slot 1',
   SLOT_2 = 'Slot 2',

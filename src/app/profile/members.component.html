@@ -1,37 +1,46 @@
 <div class="card">
   <div class="card-header">
-    <button class="btn btn-secondary" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseMembers">
-        Dependents <span class="badge bg-primary">{{ members?.length }}</span>
+    <button
+      class="btn btn-secondary"
+      (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed"
+      aria-controls="collapseMembers"
+    >
+      Dependents <span class="badge bg-primary">{{ members?.length }}</span>
     </button>
-    <button class="m-1 btn btn-secondary" *ngIf="!isCollapsed" (click)="addDependent()">
-        Add Dependent
+    <button
+      class="m-1 btn btn-secondary"
+      *ngIf="!isCollapsed"
+      (click)="addDependent()"
+    >
+      Add Dependent
     </button>
   </div>
   <div class="card-body" [collapse]="isCollapsed" id="collapseMembers">
     <div class="card-header">
       <div class="row">
         <div class="col-3">
-          <div class="p-1 m-">
+          <div class="p-0 m-1">
             <label>Relation</label>
           </div>
         </div>
         <div class="col-2">
-          <div class="p-1 m-1">
+          <div class="p-0 m-1">
             <label>City</label>
           </div>
         </div>
         <div class="col-2">
-          <div class="p-1 m-1">
+          <div class="p-0 m-1">
             <label>Vaccine</label>
           </div>
         </div>
         <div class="col-2">
-          <div class="p-1 m-1">
+          <div class="p-0 m-1">
             <label>Preference</label>
           </div>
         </div>
         <div class="col-3">
-          <div class="p-1 m-1">
+          <div class="p-0 m-1">
             <label>Schedule (Day - Slot)</label>
           </div>
         </div>
@@ -41,7 +50,9 @@
       <div class="row g-1" (click)="editDependent($event, i)">
         <div class="col-3">
           <div class="p-0 m-1 border bg-light">
-            <span>{{ member.name}} <span title="age">({{ member.age}})</span></span>
+            <span
+              >{{ member.name}} <span title="age">({{ member.age}})</span></span
+            >
           </div>
         </div>
         <div class="col-2">
