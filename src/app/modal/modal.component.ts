@@ -6,7 +6,7 @@ import {
   VXN_TYPES,
   VXN_LOCATION_PREFERENCE,
   RELATION_TYPES, GENDER,
-  SCHEDULE_GROUP_TYPES
+  SCHEDULE_GROUP_TYPES, DOSE_TYPES
 } from './../employees';
 
 @Component({
@@ -24,6 +24,7 @@ export class ModalComponent implements OnInit {
   // list of values for the select elements (vaccine preference and vaccine location preference
   relationTypes = Object.values(RELATION_TYPES);
   vxnPrefs = Object.values(VXN_TYPES);
+  doses =  Object.values(DOSE_TYPES);
   locnPrefs = Object.values(VXN_LOCATION_PREFERENCE);
   groups = Object.values(SCHEDULE_GROUP_TYPES);
 
@@ -34,6 +35,7 @@ export class ModalComponent implements OnInit {
     age: new FormControl('', Validators.required),
     location: new FormControl('', Validators.required),
     vxnType: new FormControl('Select', Validators.required),
+    dose: new FormControl('Select', Validators.required),
     locationType: new FormControl('Select', Validators.required),
     group: new FormControl('Select', Validators.required)
   });
@@ -49,6 +51,7 @@ export class ModalComponent implements OnInit {
       this.dependentForm.controls.age.setValue(this.member?.age);
       this.dependentForm.controls.location.setValue(this.member?.location);
       this.dependentForm.controls.vxnType.setValue(this.member?.vxnType);
+      this.dependentForm.controls.dose.setValue(this.member?.dose);
       this.dependentForm.controls.locationType.setValue(this.member?.locationType);
       this.dependentForm.controls.group.setValue(this.member?.group);
     }
@@ -75,6 +78,13 @@ export class ModalComponent implements OnInit {
     // );
   }
 
+  onDoseChange(event: Event) {
+    // console.log(
+    //   'this.locationType ',
+    //   this.dependentForm.controls.locationType.value
+    // );
+  }
+
   onDependentSubmit(event: Event) {
     // console.log(this.dependentForm, this.dependentForm.value);
     this.bsModalRef.hide();
@@ -88,6 +98,7 @@ export class ModalComponent implements OnInit {
       age: dependentFormValue.age,
       location: dependentFormValue.location,
       vxnType: dependentFormValue.vxnType as VXN_TYPES,
+      dose: dependentFormValue.dose as DOSE_TYPES,
       locationType: dependentFormValue.locationType as VXN_LOCATION_PREFERENCE,
       group: dependentFormValue.group as SCHEDULE_GROUP_TYPES
     };

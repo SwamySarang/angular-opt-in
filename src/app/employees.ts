@@ -4,6 +4,7 @@ export interface Person {
   name: string;
   age: number;
   gender?: GENDER;
+  dose?: DOSE_TYPES;
   location?: string;
   vxnType?: VXN_TYPES;
   locationType?: VXN_LOCATION_PREFERENCE;
@@ -23,6 +24,11 @@ export interface Member extends Person {
 export enum GENDER {
   MALE,
   FEMALE
+}
+
+export enum DOSE_TYPES {
+  DOSE_1 = 'Dose 1',
+  DOSE_2 = 'Dose 2'
 }
 
 export enum VXN_TYPES {
@@ -53,7 +59,6 @@ export enum SCHEDULE_GROUP_TYPES {
   GROUP_4 = 'Group 4'
 }
 
-/*
 export enum SCHEDULE_DAY_TYPES {
   DAY_1 = 'Day 1',
   DAY_2 = 'Day 2'
@@ -69,7 +74,6 @@ export enum SCHEDULE_SLOT_TYPES {
   SLOT_7 = 'Slot 7',
   SLOT_8 = 'Slot 8'
 }
-*/
 
 /* sample JSONs */
 export const employee1: Employee = {
@@ -89,6 +93,7 @@ export const employee: Employee = {
   empId: 12345,
   name: 'John Galt',
   gender: GENDER.MALE,
+  dose: DOSE_TYPES.DOSE_1,
   aadhaarNo: 1234 - 1234 - 1234,
   age: 31,
   location: 'Bangalore',
@@ -101,6 +106,7 @@ export const employee: Employee = {
       relationType: RELATION_TYPES.FATHER,
       name: 'John Galt',
       gender: GENDER.MALE,
+      dose: DOSE_TYPES.DOSE_2,
       aadhaarNo: 1234 - 1234 - 1234,
       age: 55,
       location: 'Bangalore',
@@ -112,6 +118,7 @@ export const employee: Employee = {
       relationType: RELATION_TYPES.MOTHER,
       name: 'Elfie Galt',
       gender: GENDER.FEMALE,
+      dose: DOSE_TYPES.DOSE_1,
       aadhaarNo: 1234 - 1234 - 1235,
       age: 50,
       location: 'Bangalore',
@@ -123,6 +130,7 @@ export const employee: Employee = {
       relationType: RELATION_TYPES.SPOUSE,
       name: 'Julie Galt',
       gender: GENDER.FEMALE,
+      dose: DOSE_TYPES.DOSE_2,
       aadhaarNo: 1234 - 1234 - 1235,
       age: 30,
       location: 'Bangalore',
@@ -134,6 +142,7 @@ export const employee: Employee = {
       relationType: RELATION_TYPES.SON,
       name: 'Sun Galt',
       gender: GENDER.FEMALE,
+      dose: DOSE_TYPES.DOSE_1,
       aadhaarNo: 1234 - 1234 - 1235,
       age: 8,
       location: 'Bangalore',
@@ -145,6 +154,7 @@ export const employee: Employee = {
       relationType: RELATION_TYPES.DAUGTHER,
       name: 'Dora Galt',
       gender: GENDER.FEMALE,
+      dose: DOSE_TYPES.DOSE_2,
       aadhaarNo: 1234 - 1234 - 1235,
       age: 4,
       location: 'Bangalore',
@@ -156,6 +166,7 @@ export const employee: Employee = {
       relationType: RELATION_TYPES.FATHER_IN_LAW,
       name: 'Jake Galt',
       gender: GENDER.MALE,
+      dose: DOSE_TYPES.DOSE_1,
       aadhaarNo: 1234 - 1234 - 1234,
       age: 52,
       location: 'Bangalore',
@@ -167,6 +178,7 @@ export const employee: Employee = {
       relationType: RELATION_TYPES.MOTHER_IN_LAW,
       name: 'Marie Galt',
       gender: GENDER.FEMALE,
+      dose: DOSE_TYPES.DOSE_1,
       aadhaarNo: 1234 - 1234 - 1235,
       age: 47,
       location: 'Bangalore',

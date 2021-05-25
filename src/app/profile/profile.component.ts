@@ -11,7 +11,7 @@ export class ProfileComponent implements OnInit {
   employee = employee;
 
   // flag to toggle profile collapse
-  isCollapsed = true;
+  isCollapsed = false;
 
   constructor() {}
 

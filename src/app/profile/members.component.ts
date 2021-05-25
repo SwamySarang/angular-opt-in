@@ -15,7 +15,7 @@ export class MembersComponent implements OnInit {
   // fontawesome icons
   faTrash = faTrashAlt;
 
-  isCollapsed = true;
+  isCollapsed = false;
   bsModalRef?: BsModalRef;
   //newlyAdded = false;
   //confirmNew = '';
@@ -35,6 +35,19 @@ export class MembersComponent implements OnInit {
         keyboard: true,
         initialState
       });
+
+      // register for edit data
+      this.bsModalRef.content.event.subscribe(newMember => {
+        // name, city, vaccine, dose, preference, group
+        if (this.members != null) {
+          this.members[idx].name = newMember.name;
+          this.members[idx].location = newMember.location;
+          this.members[idx].vxnType = newMember.vxnType;
+          this.members[idx].dose = newMember.dose;
+          this.members[idx].locationType = newMember.locationType;
+          this.members[idx].group = newMember.group;
+        }
+      });
     }
   }
 
@@ -48,6 +61,7 @@ export class MembersComponent implements OnInit {
       initialState
     });
 
+      // register for new member data
     this.bsModalRef.content.event.subscribe(member => {
       // this.members?.push(member);
       this.members?.unshift(member);
