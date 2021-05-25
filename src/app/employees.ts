@@ -43,6 +43,7 @@ export enum VXN_LOCATION_PREFERENCE {
 }
 
 export enum RELATION_TYPES {
+  SELF = 'Self',
   FATHER = 'Father',
   MOTHER = 'Mother',
   SPOUSE = 'Spouse',
@@ -53,10 +54,8 @@ export enum RELATION_TYPES {
 }
 
 export enum SCHEDULE_GROUP_TYPES {
-  GROUP_1 = 'Group 1',
-  GROUP_2 = 'Group 2',
-  GROUP_3 = 'Group 3',
-  GROUP_4 = 'Group 4'
+  GROUP_1 = '04-June-2021',
+  GROUP_2 = '05-June-2021'
 }
 
 export enum SCHEDULE_DAY_TYPES {
@@ -112,7 +111,7 @@ export const employee: Employee = {
       location: 'Bangalore',
       vxnType: VXN_TYPES.COVAXIN,
       locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-      group: SCHEDULE_GROUP_TYPES.GROUP_3
+      group: SCHEDULE_GROUP_TYPES.GROUP_2
     },
     {
       relationType: RELATION_TYPES.MOTHER,
@@ -136,7 +135,7 @@ export const employee: Employee = {
       location: 'Bangalore',
       vxnType: VXN_TYPES.COVISHIELD,
       locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-      group: SCHEDULE_GROUP_TYPES.GROUP_4
+      group: SCHEDULE_GROUP_TYPES.GROUP_1
     },
     {
       relationType: RELATION_TYPES.SON,
@@ -184,7 +183,7 @@ export const employee: Employee = {
       location: 'Bangalore',
       vxnType: VXN_TYPES.COVISHIELD,
       locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-      group: SCHEDULE_GROUP_TYPES.GROUP_4
+      group: SCHEDULE_GROUP_TYPES.GROUP_1
     }
   ]
 };
