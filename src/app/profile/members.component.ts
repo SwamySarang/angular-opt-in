@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Member } from './../employees';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ModalComponent } from '../modal/modal.component';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-profile-members',
@@ -10,7 +11,10 @@ import { ModalComponent } from '../modal/modal.component';
   styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit {
-  @Input() members?: Member[];
+  @Input() members: Member[] = [];
+
+  // fontawesome icons
+  faTrash = faTrashAlt;
 
   isCollapsed = true;
   bsModalRef?: BsModalRef;
@@ -52,5 +56,11 @@ export class MembersComponent implements OnInit {
 
   onSelectChange(event: Event) {
     console.log(event, this.memberSelect.value)
+  }
+
+  deleteDependent(event: Event, idx: number) {
+    console.log('deleteDependent ', event, idx);
+    event.stopPropagation();
+    this.members?.splice(idx, 1);
   }
 }
