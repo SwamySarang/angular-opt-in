@@ -39,9 +39,14 @@
             <label>Preference</label>
           </div>
         </div>
-        <div class="col-3">
+        <div class="col-2">
           <div class="p-0 m-1">
-            <label>Schedule (Day - Slot)</label>
+            <label>Group</label>
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="p-0 m-1">
+            <label>Delete</label>
           </div>
         </div>
       </div>
@@ -70,9 +75,14 @@
             <span>{{ member.locationType}}</span>
           </div>
         </div>
-        <div class="col-3">
+        <div class="col-2">
           <div class="p-0 m-1 border bg-light">
-            <span>{{ member.scheduleDay}} - {{ member.scheduleSlot}}</span>
+            <span>{{ member.group}}</span>
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="p-0 m-1 border bg-light">
+            <span><i class="fal fa-trash-alt"></i></span>
           </div>
         </div>
       </div>

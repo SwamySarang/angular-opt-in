@@ -1,6 +1,11 @@
 <div class="card">
   <div class="card-header">
-    <button class="btn btn-secondary" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseProfile">
+    <button
+      class="btn btn-secondary"
+      (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed"
+      aria-controls="collapseProfile"
+    >
       Profile
     </button>
   </div>
@@ -44,8 +49,8 @@
       </div>
       <div class="col-6">
         <div class="p-1 border bg-light">
-          <label>Schedule (Day -  Slot):</label>
-          <span>{{ employee.scheduleDay}} - {{ employee.scheduleSlot}}</span>
+          <label>Group:</label>
+          <span>{{ employee.group}}</span>
         </div>
       </div>
     </div>

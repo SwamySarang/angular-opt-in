@@ -1,14 +1,13 @@
 /* Types */
 export interface Person {
-  aadhaarNo: number;
+  aadhaarNo?: number;
   name: string;
   age: number;
-  gender: GENDER;
+  gender?: GENDER;
   location?: string;
   vxnType?: VXN_TYPES;
   locationType?: VXN_LOCATION_PREFERENCE;
-  scheduleDay?: SCHEDULE_DAY_TYPES;
-  scheduleSlot?: SCHEDULE_SLOT_TYPES;
+  group: SCHEDULE_GROUP_TYPES;
 }
 
 export interface Employee extends Person {
@@ -47,16 +46,17 @@ export enum RELATION_TYPES {
   DAUGTHER = 'Daughter'
 }
 
-export enum SCHEDULE_DAY_TYPES {
-  DAY_1 = 'Day 1',
-  DAY_2 = 'Day 2'
-}
-
 export enum SCHEDULE_GROUP_TYPES {
   GROUP_1 = 'Group 1',
   GROUP_2 = 'Group 2',
   GROUP_3 = 'Group 3',
   GROUP_4 = 'Group 4'
+}
+
+/*
+export enum SCHEDULE_DAY_TYPES {
+  DAY_1 = 'Day 1',
+  DAY_2 = 'Day 2'
 }
 
 export enum SCHEDULE_SLOT_TYPES {
@@ -69,6 +69,7 @@ export enum SCHEDULE_SLOT_TYPES {
   SLOT_7 = 'Slot 7',
   SLOT_8 = 'Slot 8'
 }
+*/
 
 /* sample JSONs */
 export const employee1: Employee = {
@@ -81,8 +82,7 @@ export const employee1: Employee = {
   workLocation: 'Bangalore',
   vxnType: VXN_TYPES.COVAXIN,
   locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-  scheduleDay: SCHEDULE_DAY_TYPES.DAY_1,
-  scheduleSlot: SCHEDULE_SLOT_TYPES.SLOT_1
+  group: SCHEDULE_GROUP_TYPES.GROUP_1
 };
 
 export const employee: Employee = {
@@ -95,8 +95,7 @@ export const employee: Employee = {
   workLocation: 'Bangalore',
   vxnType: VXN_TYPES.COVAXIN,
   locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-  scheduleDay: SCHEDULE_DAY_TYPES.DAY_1,
-  scheduleSlot: SCHEDULE_SLOT_TYPES.SLOT_1,
+  group: SCHEDULE_GROUP_TYPES.GROUP_2,
   members: [
     {
       relationType: RELATION_TYPES.FATHER,
@@ -107,8 +106,7 @@ export const employee: Employee = {
       location: 'Bangalore',
       vxnType: VXN_TYPES.COVAXIN,
       locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-      scheduleDay: SCHEDULE_DAY_TYPES.DAY_1,
-      scheduleSlot: SCHEDULE_SLOT_TYPES.SLOT_1
+      group: SCHEDULE_GROUP_TYPES.GROUP_3
     },
     {
       relationType: RELATION_TYPES.MOTHER,
@@ -119,8 +117,7 @@ export const employee: Employee = {
       location: 'Bangalore',
       vxnType: VXN_TYPES.COVISHIELD,
       locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-      scheduleDay: SCHEDULE_DAY_TYPES.DAY_1,
-      scheduleSlot: SCHEDULE_SLOT_TYPES.SLOT_2
+      group: SCHEDULE_GROUP_TYPES.GROUP_1
     },
     {
       relationType: RELATION_TYPES.SPOUSE,
@@ -131,8 +128,7 @@ export const employee: Employee = {
       location: 'Bangalore',
       vxnType: VXN_TYPES.COVISHIELD,
       locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-      scheduleDay: SCHEDULE_DAY_TYPES.DAY_1,
-      scheduleSlot: SCHEDULE_SLOT_TYPES.SLOT_1
+      group: SCHEDULE_GROUP_TYPES.GROUP_4
     },
     {
       relationType: RELATION_TYPES.SON,
@@ -143,8 +139,7 @@ export const employee: Employee = {
       location: 'Bangalore',
       vxnType: VXN_TYPES.COVISHIELD,
       locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-      scheduleDay: SCHEDULE_DAY_TYPES.DAY_1,
-      scheduleSlot: SCHEDULE_SLOT_TYPES.SLOT_3
+      group: SCHEDULE_GROUP_TYPES.GROUP_2
     },
     {
       relationType: RELATION_TYPES.DAUGTHER,
@@ -155,8 +150,7 @@ export const employee: Employee = {
       location: 'Bangalore',
       vxnType: VXN_TYPES.COVISHIELD,
       locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-      scheduleDay: SCHEDULE_DAY_TYPES.DAY_1,
-      scheduleSlot: SCHEDULE_SLOT_TYPES.SLOT_1
+      group: SCHEDULE_GROUP_TYPES.GROUP_1
     },
     {
       relationType: RELATION_TYPES.FATHER_IN_LAW,
@@ -167,8 +161,7 @@ export const employee: Employee = {
       location: 'Bangalore',
       vxnType: VXN_TYPES.COVAXIN,
       locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-      scheduleDay: SCHEDULE_DAY_TYPES.DAY_2,
-      scheduleSlot: SCHEDULE_SLOT_TYPES.SLOT_1
+      group: SCHEDULE_GROUP_TYPES.GROUP_1
     },
     {
       relationType: RELATION_TYPES.MOTHER_IN_LAW,
@@ -179,8 +172,7 @@ export const employee: Employee = {
       location: 'Bangalore',
       vxnType: VXN_TYPES.COVISHIELD,
       locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-      scheduleDay: SCHEDULE_DAY_TYPES.DAY_1,
-      scheduleSlot: SCHEDULE_SLOT_TYPES.SLOT_5
+      group: SCHEDULE_GROUP_TYPES.GROUP_4
     }
   ]
 };

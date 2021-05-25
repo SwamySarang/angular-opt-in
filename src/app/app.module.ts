@@ -7,7 +7,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { BsModalRef, ModalModule } from 'ngx-bootstrap/modal';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
@@ -22,6 +23,7 @@ import { ModalComponent } from './modal/modal.component';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    FontAwesomeModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),

@@ -6,8 +6,7 @@ import {
   VXN_TYPES,
   VXN_LOCATION_PREFERENCE,
   RELATION_TYPES, GENDER,
-  SCHEDULE_DAY_TYPES,
-  SCHEDULE_SLOT_TYPES
+  SCHEDULE_GROUP_TYPES
 } from './../employees';
 
 @Component({
@@ -26,19 +25,17 @@ export class ModalComponent implements OnInit {
   relationTypes = Object.values(RELATION_TYPES);
   vxnPrefs = Object.values(VXN_TYPES);
   locnPrefs = Object.values(VXN_LOCATION_PREFERENCE);
-  schedDays = Object.values(SCHEDULE_DAY_TYPES);
-  schedSlots = Object.values(SCHEDULE_SLOT_TYPES);
+  groups = Object.values(SCHEDULE_GROUP_TYPES);
 
   // Reactive Form elements
   dependentForm = new FormGroup({
     relationType: new FormControl('Select', [Validators.required, Validators.minLength(4)]),
     name: new FormControl('', Validators.required),
-    aadhaarNo: new FormControl('', Validators.required),
+    age: new FormControl('', Validators.required),
     location: new FormControl('', Validators.required),
     vxnType: new FormControl('Select', Validators.required),
     locationType: new FormControl('Select', Validators.required),
-    scheduleDay: new FormControl('Select', Validators.required),
-    scheduleSlot: new FormControl('Select', Validators.required)
+    group: new FormControl('Select', Validators.required)
   });
 
   constructor(private bsModalRef: BsModalRef) {}
@@ -49,12 +46,11 @@ export class ModalComponent implements OnInit {
     } else if (this.mode === 'edit') {
       this.dependentForm.controls.relationType.setValue(this.member?.relationType);
       this.dependentForm.controls.name.setValue(this.member?.name);
-      this.dependentForm.controls.aadhaarNo.setValue(this.member?.aadhaarNo);
+      this.dependentForm.controls.age.setValue(this.member?.age);
       this.dependentForm.controls.location.setValue(this.member?.location);
       this.dependentForm.controls.vxnType.setValue(this.member?.vxnType);
       this.dependentForm.controls.locationType.setValue(this.member?.locationType);
-      this.dependentForm.controls.scheduleDay.setValue(this.member?.scheduleDay);
-      this.dependentForm.controls.scheduleSlot.setValue(this.member?.scheduleSlot);
+      this.dependentForm.controls.group.setValue(this.member?.group);
     }
   }
 
@@ -89,14 +85,11 @@ export class ModalComponent implements OnInit {
     let member: Member = {
       relationType: dependentFormValue.relationType as RELATION_TYPES,
       name: dependentFormValue.name,
-      gender: dependentFormValue?.gender as GENDER,
-      aadhaarNo: dependentFormValue.aadhaarNo,
       age: dependentFormValue.age,
       location: dependentFormValue.location,
       vxnType: dependentFormValue.vxnType as VXN_TYPES,
       locationType: dependentFormValue.locationType as VXN_LOCATION_PREFERENCE,
-      scheduleDay: dependentFormValue.scheduleDay as SCHEDULE_DAY_TYPES,
-      scheduleSlot: dependentFormValue.scheduleSlot as SCHEDULE_SLOT_TYPES
+      group: dependentFormValue.group as SCHEDULE_GROUP_TYPES
     };
 
     return member;
