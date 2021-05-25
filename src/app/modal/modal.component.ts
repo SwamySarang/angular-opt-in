@@ -55,28 +55,28 @@ export class ModalComponent implements OnInit {
   }
 
   onRelationTypeChange(event: Event) {
-    console.log(
-      'this.relationType ',
-      this.dependentForm.controls.relationType.value
-    );
+    // console.log(
+    //   'this.relationType ',
+    //   this.dependentForm.controls.relationType.value
+    // );
   }
 
   onVaccinePreferenceChange(event: Event) {
-    console.log(
-      'this.vxnType ',
-      this.dependentForm.controls.vxnType.value
-    );
+    // console.log(
+    //   'this.vxnType ',
+    //   this.dependentForm.controls.vxnType.value
+    // );
   }
 
   onLocationPreferenceChange(event: Event) {
-    console.log(
-      'this.locationType ',
-      this.dependentForm.controls.locationType.value
-    );
+    // console.log(
+    //   'this.locationType ',
+    //   this.dependentForm.controls.locationType.value
+    // );
   }
 
   onDependentSubmit(event: Event) {
-    console.log(this.dependentForm, this.dependentForm.value);
+    // console.log(this.dependentForm, this.dependentForm.value);
     this.bsModalRef.hide();
     this.event.emit(this.extractMember(this.dependentForm.value));
   }

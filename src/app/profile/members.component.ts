@@ -18,6 +18,8 @@ export class MembersComponent implements OnInit {
 
   isCollapsed = true;
   bsModalRef?: BsModalRef;
+  //newlyAdded = false;
+  //confirmNew = '';
 
   memberSelect = new FormControl('');
 
@@ -50,17 +52,31 @@ export class MembersComponent implements OnInit {
     });
 
     this.bsModalRef.content.event.subscribe(member => {
-      this.members?.push(member);
+      // this.members?.push(member);
+      this.members?.unshift(member);
+      //this.newlyAdded = true;
     });
-  }
-
-  onSelectChange(event: Event) {
-    console.log(event, this.memberSelect.value)
   }
 
   deleteDependent(event: Event, idx: number) {
     console.log('deleteDependent ', event, idx);
     event.stopPropagation();
     this.members?.splice(idx, 1);
+  }
+
+  isNewlyAdded(event: Event, idx: number): string {
+      // if (idx === 0 && this.newlyAdded) {
+      //   return 'lightgreen';
+      // } else {
+      //   return '';
+      // }
+      return ''
+      // this.confirmNew =  ;
+      // setTimeout(() => {
+      //   console.log("inside timeout ", this.newlyAdded);
+      //   this.newlyAdded = false;
+      //   this.confirmNew =  '';
+      //   console.log("inside timeout ", this.newlyAdded);
+      // }, 500);
   }
 }

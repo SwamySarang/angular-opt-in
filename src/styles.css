@@ -151,3 +151,7 @@ can be found in the LICENSE file at https://angular.io/license
 block {
   display: block;
 }
+
+app-top-bar {
+  background-color: #0d2e8c;
+}
