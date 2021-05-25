@@ -20,17 +20,17 @@
   <div class="card-body" [collapse]="isCollapsed" id="collapseMembers">
     <div class="card-header" *ngIf="members?.length > 0">
       <div class="row">
-        <div class="col-3">
+        <div class="col-2">
+          <div class="p-0 m-1">
+            <label>Relation</label>
+          </div>
+        </div>
+        <div class="col-2">
           <div class="p-0 m-1">
             <label>Name</label>
           </div>
         </div>
         <div class="col-2">
-          <div class="p-0 m-1">
-            <label>City</label>
-          </div>
-        </div>
-        <div class="col-1">
           <div class="p-0 m-1">
             <label>Vaccine</label>
           </div>
@@ -42,12 +42,12 @@
         </div>
         <div class="col-2">
           <div class="p-0 m-1">
-            <label>Preference</label>
+            <label>Day</label>
           </div>
         </div>
         <div class="col-2">
           <div class="p-0 m-1">
-            <label>Group</label>
+            <label>Slot</label>
           </div>
         </div>
         <div class="col-1">
@@ -59,18 +59,21 @@
     </div>
     <div *ngFor="let member of members; let i = index">
       <div class="row g-1" (click)="editDependent($event, i)">
-        <div class="col-3">
+        <div class="col-2">
           <div class="p-0 m-1 border bg-light">
             <span
-              >{{ member.name}} <span title="age">({{ member.age}})</span></span>
+              >{{ member.relationType}}
+            </span>
           </div>
         </div>
         <div class="col-2">
           <div class="p-0 m-1 border bg-light">
-            <span>{{ member.location}}</span>
+            <span
+              >{{ member.name}} <span title="age">({{ member.age}})</span>
+            </span>
           </div>
         </div>
-        <div class="col-1">
+        <div class="col-2">
           <div class="p-0 m-1 border bg-light">
             <span>{{ member.vxnType}}</span>
           </div>
@@ -82,12 +85,12 @@
         </div>
         <div class="col-2">
           <div class="p-0 m-1 border bg-light">
-            <span>{{ member.locationType}}</span>
+            <span>{{ member.day}}</span>
           </div>
         </div>
         <div class="col-2">
           <div class="p-0 m-1 border bg-light">
-            <span>{{ member.group}}</span>
+            <span>{{ member.slot}}</span>
           </div>
         </div>
         <div class="col-1">

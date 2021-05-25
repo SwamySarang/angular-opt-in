@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Member } from './../employees';
+import { Employee, Member } from './../employees';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ModalComponent } from '../modal/modal.component';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -10,7 +10,7 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit {
-  @Input() members?: Member[];
+  @Input() employee?: Employee;
 
   // fontawesome icons
   faTrash = faTrashAlt;
@@ -25,10 +25,12 @@ export class MembersComponent implements OnInit {
   ngOnInit() {}
 
   editDependent(event: Event, idx: number) {
-    if (this.members != null) {
+    if (this.employee?.members != null) {
+      let members = this.employee?.members;
       const initialState = {
-        member: this.members[idx],
-        mode: 'edit'
+        member: members[idx],
+        mode: 'edit',
+        empDay: this.employee?.day
       };
       this.bsModalRef = this.modalService.show(ModalComponent, {
         class: 'modal-lg',
@@ -38,14 +40,13 @@ export class MembersComponent implements OnInit {
 
       // register for edit data
       this.bsModalRef.content.event.subscribe(newMember => {
-        // name, city, vaccine, dose, preference, group
-        if (this.members != null) {
-          this.members[idx].name = newMember.name;
-          this.members[idx].location = newMember.location;
-          this.members[idx].vxnType = newMember.vxnType;
-          this.members[idx].dose = newMember.dose;
-          this.members[idx].locationType = newMember.locationType;
-          this.members[idx].group = newMember.group;
+        if (this.employee?.members != null) {
+          members[idx].name = newMember.name;
+          members[idx].age = newMember.age;
+          members[idx].vxnType = newMember.vxnType;
+          members[idx].dose = newMember.dose;
+          members[idx].day = newMember.day;
+          members[idx].slot = newMember.slot;
         }
       });
     }
@@ -53,7 +54,8 @@ export class MembersComponent implements OnInit {
 
   addDependent() {
     const initialState = {
-      mode: 'add'
+      mode: 'add',
+      empDay: this.employee?.day
     };
     this.bsModalRef = this.modalService.show(ModalComponent, {
       class: 'modal-lg',
@@ -64,7 +66,7 @@ export class MembersComponent implements OnInit {
       // register for new member data
     this.bsModalRef.content.event.subscribe(member => {
       // this.members?.push(member);
-      this.members?.unshift(member);
+      this.employee?.members?.unshift(member);
       //this.newlyAdded = true;
     });
   }
@@ -72,7 +74,7 @@ export class MembersComponent implements OnInit {
   deleteDependent(event: Event, idx: number) {
     console.log('deleteDependent ', event, idx);
     event.stopPropagation();
-    this.members?.splice(idx, 1);
+    this.employee?.members?.splice(idx, 1);
   }
 
   isNewlyAdded(event: Event, idx: number): string {

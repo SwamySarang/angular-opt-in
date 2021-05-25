@@ -18,7 +18,7 @@
     <div class="card">
       <div class="card-body">
         <div class="row g-1">
-          <div class="col-3">
+          <div class="col-4">
             <div class="p-0 m-1 border bg-light">
               <label>Relation Type:</label>
               <select
@@ -33,7 +33,7 @@
               </select>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-4">
             <div class="p-0 m-1 border bg-light">
               <label>Name:</label>
               <input
@@ -52,7 +52,7 @@
               </div>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-4">
             <div class="p-0 m-1 border bg-light">
               <label>Age:</label>
               <input
@@ -63,49 +63,8 @@
               />
             </div>
           </div>
-          <div class="col-3">
-            <div class="p-0 m-1 border bg-light">
-              <label>City</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="location"
-                required
-              />
-            </div>
-          </div>
         </div>
         <div class="row g-1">
-          <div class="col-3">
-            <div class="p-0 m-1 border bg-light">
-              <label>Dose:</label>
-              <select
-                id="doseId"
-                formControlName="dose"
-                (change)="onDoseChange($event)"
-              >
-                <option value="Select">Select</option>
-                <option [value]="dose" *ngFor="let dose of doses"
-                  >{{ dose }}</option
-                >
-              </select>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="p-0 m-1 border bg-light">
-              <label>Location Preference:</label>
-              <select
-                id="vxLocnPrefId"
-                formControlName="locationType"
-                (change)="onLocationPreferenceChange($event)"
-              >
-                <option value="Select">Select</option>
-                <option [value]="locnPref" *ngFor="let locnPref of locnPrefs"
-                  >{{ locnPref }}</option
-                >
-              </select>
-            </div>
-          </div>
           <div class="col-3">
             <div class="p-0 m-1 border bg-light">
               <label>Vaccine Preference</label>
@@ -121,13 +80,35 @@
               </select>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-2">
             <div class="p-0 m-1 border bg-light">
-              <label>Group:</label>
-              <select id="dayId" formControlName="group">
+              <label>Dose:</label>
+              <select
+                id="doseId"
+                formControlName="dose"
+                (change)="onDoseChange($event)"
+              >
                 <option value="Select">Select</option>
-                <option [value]="group" *ngFor="let group of groups"
-                  >{{ group }}</option
+                <option [value]="dose" *ngFor="let dose of doses"
+                  >{{ dose }}</option
+                >
+              </select>
+            </div>
+          </div>
+          <div class="col-7">
+            <div class="p-0 m-1 border bg-light">
+              <label>Day:</label>
+              <select id="dayId" formControlName="day">
+                <option value="Select">Select</option>
+                <option [value]="day" *ngFor="let day of days"
+                  >{{ day }}</option
+                >
+              </select>
+              <span class="p-1"></span>
+              <select id="slotId" formControlName="slot" *ngIf="empDay !== day">
+                <option value="Select">Select</option>
+                <option [value]="slot" *ngFor="let slot of slots"
+                  >{{ slot }}</option
                 >
               </select>
             </div>

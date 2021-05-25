@@ -4,16 +4,17 @@ export interface Person {
   name: string;
   age: number;
   gender?: GENDER;
-  dose?: DOSE_TYPES;
   location?: string;
   vxnType?: VXN_TYPES;
+  dose?: DOSE_TYPES;
   locationType?: VXN_LOCATION_PREFERENCE;
-  group: SCHEDULE_GROUP_TYPES;
+  day: SCHEDULE_DAY_TYPES;
+  slot: SCHEDULE_SLOT_TYPES;
 }
 
 export interface Employee extends Person {
   empId: number;
-  workLocation: string;
+  email: string;
   members?: Member[];
 }
 
@@ -59,19 +60,13 @@ export enum SCHEDULE_GROUP_TYPES {
 }
 
 export enum SCHEDULE_DAY_TYPES {
-  DAY_1 = 'Day 1',
-  DAY_2 = 'Day 2'
+  DAY_1 = '04-June-2021',
+  DAY_2 = '05-June-2021'
 }
 
 export enum SCHEDULE_SLOT_TYPES {
-  SLOT_1 = 'Slot 1',
-  SLOT_2 = 'Slot 2',
-  SLOT_3 = 'Slot 3',
-  SLOT_4 = 'Slot 4',
-  SLOT_5 = 'Slot 5',
-  SLOT_6 = 'Slot 6',
-  SLOT_7 = 'Slot 7',
-  SLOT_8 = 'Slot 8'
+  SAME_SLOT = 'Same as Employee Slot',
+  DIFF_SLOT = 'Different from Employee Slot'
 }
 
 /* sample JSONs */
@@ -82,10 +77,11 @@ export const employee1: Employee = {
   aadhaarNo: 1234 - 1234 - 1234,
   age: 31,
   location: 'Bangalore',
-  workLocation: 'Bangalore',
+  email: 'test@test.com',
   vxnType: VXN_TYPES.COVAXIN,
   locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-  group: SCHEDULE_GROUP_TYPES.GROUP_1
+  day: SCHEDULE_DAY_TYPES.DAY_1,
+  slot: SCHEDULE_SLOT_TYPES.SAME_SLOT
 };
 
 export const employee: Employee = {
@@ -96,10 +92,11 @@ export const employee: Employee = {
   aadhaarNo: 1234 - 1234 - 1234,
   age: 31,
   location: 'Bangalore',
-  workLocation: 'Bangalore',
+  email: 'test@test.com',
   vxnType: VXN_TYPES.COVAXIN,
   locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-  group: SCHEDULE_GROUP_TYPES.GROUP_2,
+  day: SCHEDULE_DAY_TYPES.DAY_1,
+  slot: SCHEDULE_SLOT_TYPES.SAME_SLOT,
   members: [
     {
       relationType: RELATION_TYPES.FATHER,
@@ -111,7 +108,8 @@ export const employee: Employee = {
       location: 'Bangalore',
       vxnType: VXN_TYPES.COVAXIN,
       locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-      group: SCHEDULE_GROUP_TYPES.GROUP_2
+      day: SCHEDULE_DAY_TYPES.DAY_1,
+      slot: SCHEDULE_SLOT_TYPES.DIFF_SLOT
     },
     {
       relationType: RELATION_TYPES.MOTHER,
@@ -123,7 +121,8 @@ export const employee: Employee = {
       location: 'Bangalore',
       vxnType: VXN_TYPES.COVISHIELD,
       locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-      group: SCHEDULE_GROUP_TYPES.GROUP_1
+      day: SCHEDULE_DAY_TYPES.DAY_1,
+      slot: SCHEDULE_SLOT_TYPES.SAME_SLOT
     },
     {
       relationType: RELATION_TYPES.SPOUSE,
@@ -135,7 +134,8 @@ export const employee: Employee = {
       location: 'Bangalore',
       vxnType: VXN_TYPES.COVISHIELD,
       locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-      group: SCHEDULE_GROUP_TYPES.GROUP_1
+      day: SCHEDULE_DAY_TYPES.DAY_1,
+      slot: SCHEDULE_SLOT_TYPES.DIFF_SLOT
     },
     {
       relationType: RELATION_TYPES.SON,
@@ -147,7 +147,8 @@ export const employee: Employee = {
       location: 'Bangalore',
       vxnType: VXN_TYPES.COVISHIELD,
       locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-      group: SCHEDULE_GROUP_TYPES.GROUP_2
+      day: SCHEDULE_DAY_TYPES.DAY_1,
+      slot: SCHEDULE_SLOT_TYPES.SAME_SLOT
     },
     {
       relationType: RELATION_TYPES.DAUGTHER,
@@ -159,7 +160,8 @@ export const employee: Employee = {
       location: 'Bangalore',
       vxnType: VXN_TYPES.COVISHIELD,
       locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-      group: SCHEDULE_GROUP_TYPES.GROUP_1
+      day: SCHEDULE_DAY_TYPES.DAY_1,
+      slot: SCHEDULE_SLOT_TYPES.DIFF_SLOT
     },
     {
       relationType: RELATION_TYPES.FATHER_IN_LAW,
@@ -171,7 +173,8 @@ export const employee: Employee = {
       location: 'Bangalore',
       vxnType: VXN_TYPES.COVAXIN,
       locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-      group: SCHEDULE_GROUP_TYPES.GROUP_1
+      day: SCHEDULE_DAY_TYPES.DAY_1,
+      slot: SCHEDULE_SLOT_TYPES.SAME_SLOT
     },
     {
       relationType: RELATION_TYPES.MOTHER_IN_LAW,
@@ -183,7 +186,8 @@ export const employee: Employee = {
       location: 'Bangalore',
       vxnType: VXN_TYPES.COVISHIELD,
       locationType: VXN_LOCATION_PREFERENCE.ON_SITE,
-      group: SCHEDULE_GROUP_TYPES.GROUP_1
+      day: SCHEDULE_DAY_TYPES.DAY_2,
+      slot: SCHEDULE_SLOT_TYPES.DIFF_SLOT
     }
   ]
 };

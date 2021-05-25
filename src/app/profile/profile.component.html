@@ -26,7 +26,7 @@
       <div class="col-4">
         <div class="p-1 border bg-light">
           <label>Email:</label>
-          <span>test@test.com</span>
+          <span>{{ employee.email}}</span>
         </div>
       </div>
       <!--div class="col-3">
@@ -57,5 +57,5 @@
   </div>
 </div>
 <div>
-  <app-profile-members [members]="employee.members"></app-profile-members>
+  <app-profile-members [employee]="employee"></app-profile-members>
 </div>

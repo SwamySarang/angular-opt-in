@@ -6,7 +6,7 @@ import {
   VXN_TYPES,
   VXN_LOCATION_PREFERENCE,
   RELATION_TYPES, GENDER,
-  SCHEDULE_GROUP_TYPES, DOSE_TYPES
+  SCHEDULE_GROUP_TYPES, DOSE_TYPES, SCHEDULE_DAY_TYPES, SCHEDULE_SLOT_TYPES
 } from './../employees';
 
 @Component({
@@ -18,6 +18,7 @@ export class ModalComponent implements OnInit {
   // input data from Modal Consumers
   @Input() member?: Member;
   @Input() mode?: string;
+  @Input() empDay?: string;
 
   public event: EventEmitter<Member> = new EventEmitter();
 
@@ -25,19 +26,19 @@ export class ModalComponent implements OnInit {
   relationTypes = Object.values(RELATION_TYPES);
   vxnPrefs = Object.values(VXN_TYPES);
   doses =  Object.values(DOSE_TYPES);
-  locnPrefs = Object.values(VXN_LOCATION_PREFERENCE);
-  groups = Object.values(SCHEDULE_GROUP_TYPES);
+  days = Object.values(SCHEDULE_DAY_TYPES);
+  slots = Object.values(SCHEDULE_SLOT_TYPES);
 
   // Reactive Form elements
   dependentForm = new FormGroup({
     relationType: new FormControl('Select', [Validators.required, Validators.minLength(4)]),
     name: new FormControl('', Validators.required),
     age: new FormControl('', Validators.required),
-    location: new FormControl('', Validators.required),
     vxnType: new FormControl('Select', Validators.required),
     dose: new FormControl('Select', Validators.required),
     locationType: new FormControl('Select', Validators.required),
-    group: new FormControl('Select', Validators.required)
+    day: new FormControl('Select', Validators.required),
+    slot: new FormControl('Select', Validators.required)
   });
 
   constructor(private bsModalRef: BsModalRef) {}
@@ -49,11 +50,10 @@ export class ModalComponent implements OnInit {
       this.dependentForm.controls.relationType.setValue(this.member?.relationType);
       this.dependentForm.controls.name.setValue(this.member?.name);
       this.dependentForm.controls.age.setValue(this.member?.age);
-      this.dependentForm.controls.location.setValue(this.member?.location);
       this.dependentForm.controls.vxnType.setValue(this.member?.vxnType);
       this.dependentForm.controls.dose.setValue(this.member?.dose);
-      this.dependentForm.controls.locationType.setValue(this.member?.locationType);
-      this.dependentForm.controls.group.setValue(this.member?.group);
+      this.dependentForm.controls.day.setValue(this.member?.day);
+      this.dependentForm.controls.slot.setValue(this.member?.slot);
     }
   }
 
@@ -94,13 +94,12 @@ export class ModalComponent implements OnInit {
   private extractMember(dependentFormValue: any): Member {
     let member: Member = {
       relationType: dependentFormValue.relationType as RELATION_TYPES,
-      name: dependentFormValue.name,
-      age: dependentFormValue.age,
-      location: dependentFormValue.location,
+      name: dependentFormValue.name as string,
+      age: dependentFormValue.age as number,
       vxnType: dependentFormValue.vxnType as VXN_TYPES,
       dose: dependentFormValue.dose as DOSE_TYPES,
-      locationType: dependentFormValue.locationType as VXN_LOCATION_PREFERENCE,
-      group: dependentFormValue.group as SCHEDULE_GROUP_TYPES
+      day: dependentFormValue.day as SCHEDULE_DAY_TYPES,
+      slot: dependentFormValue.slot as SCHEDULE_SLOT_TYPES,
     };
 
     return member;
