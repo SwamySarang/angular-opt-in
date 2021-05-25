@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-header">
+    <button class="btn btn-secondary" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseVaccines">
+        Vaccines
+      </button>
+  </div>
+  <div class="card-body" *ngFor="let vaccine of vaccines" [collapse]="isCollapsed" id="collapseVaccines">
+    <div class="row g-1">
+      <div class="col-2">
+        <div class="p-0 border bg-light">
+          <label>Name:</label>
+          <span>{{ vaccine.name}}</span>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="p-0 border bg-light">
+          <label>Description:</label>
+          <span>{{ vaccine.description}}</span>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="p-0 border bg-light">
+          <label>Vaccine</label>
+          <span>{{ vaccine.info}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->

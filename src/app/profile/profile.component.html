@@ -1,0 +1,56 @@
+<div class="card">
+  <div class="card-header">
+    <button class="btn btn-secondary" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseProfile">
+      Profile
+    </button>
+  </div>
+  <div class="card-body" [collapse]="isCollapsed" id="collapseProfile">
+    <div class="row g-1">
+      <div class="col-3">
+        <div class="p-1 border bg-light">
+          <label>Employee ID:</label>
+          <span>{{ employee.empId}}</span>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="p-1 border bg-light">
+          <label>Name:</label>
+          <span>{{ employee.name}}</span>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="p-1 border bg-light">
+          <label>Age:</label>
+          <span>{{ employee.age}}</span>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="p-1 border bg-light">
+          <label>City:</label>
+          <span>{{ employee.location}}</span>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="p-1 border bg-light">
+          <label>Vaccine</label>
+          <span>{{ employee.vxnType}}</span>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="p-1 border bg-light">
+          <label>Location:</label>
+          <span>{{ employee.locationType}}</span>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="p-1 border bg-light">
+          <label>Schedule (Day -  Slot):</label>
+          <span>{{ employee.scheduleDay}} - {{ employee.scheduleSlot}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="employee.members?.length > 0">
+  <app-profile-members [members]="employee.members"></app-profile-members>
+</div>

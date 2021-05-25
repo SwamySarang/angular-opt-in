@@ -1,0 +1,90 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">
+    <span *ngIf="mode === 'add'">Add</span>
+    <span *ngIf="mode === 'edit'">Edit</span>
+    Dependent
+  </h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">X</button>
+</div>
+<form [formGroup]="dependentForm" (ngSubmit)="onDependentSubmit()">
+  <div class="modal-body">
+    <div class="card">
+      <div class="card-body">
+        <div class="row g-1">
+          <div class="col-3">
+            <div class="p-0 m-1 border bg-light">
+              <label>Relation Type:</label>
+              <select id="relationTypeId" formControlName="relationType" (change)="onRelationTypeChange($event)">
+                <option value="Select">Select</option>
+                <option [value]="relType" *ngFor="let relType of relationTypes">{{ relType }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="p-0 m-1 border bg-light">
+              <label>Name:</label>
+              <input type="text" class="form-control" formControlName="name" required>
+              <div *ngIf="name?.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                <div *ngIf="name.errors?.required">
+                  Name is required.
+                </div>
+                <div *ngIf="name.errors?.minlength">
+                  Name must be at least 4 characters long.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="p-0 m-1 border bg-light">
+              <label>Aadhaar No:</label>
+              <input type="text" class="form-control" formControlName="aadhaarNo" required>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="p-0 m-1 border bg-light">
+              <label>City</label>
+              <input type="text" class="form-control" formControlName="location" required>
+            </div>
+          </div>
+        </div>
+        <div class="row g-1">
+          <div class="col-4">
+            <div class="p-0 m-1 border bg-light">
+              <label>Location Preference:</label>
+              <select id="vxLocnPrefId" formControlName="locationType" (change)="onLocationPreferenceChange($event)">
+                <option value="Select">Select</option>
+                <option [value]="locnPref" *ngFor="let locnPref of locnPrefs">{{ locnPref }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="p-0 m-1 border bg-light">
+              <label>Vaccine Preference</label>
+              <select id="vxPrefId" formControlName="vxnType" (change)="onVaccinePreferenceChange($event)">
+                <option value="Select">Select</option>
+                <option [value]="vxPref" *ngFor="let vxPref of vxnPrefs">{{ vxPref }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="p-0 m-1 border bg-light">
+              <label>Schedule (Day - Slot):</label>
+              <select id="dayId" formControlName="scheduleDay">
+                <option value="Select">Select</option>
+                <option [value]="day" *ngFor="let day of schedDays">{{ day }}</option>
+              </select>
+              <select id="slotId" formControlName="scheduleSlot">
+                <option value="Select">Select</option>
+                <option [value]="slot" *ngFor="let slot of schedSlots">{{ slot }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-secondary">Submit</button>
+    <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">Close</button>
+  </div>
+</form>
