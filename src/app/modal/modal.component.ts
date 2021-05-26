@@ -25,7 +25,7 @@ export class ModalComponent implements OnInit {
   @Input() empRegisteredDay?: string;
 
   public event: EventEmitter<Member> = new EventEmitter();
-  enableSlots: boolean = false;
+  enableSlots: boolean = true;
 
   // list of values for the select elements (vaccine preference and vaccine location preference
   relationTypes = Object.values(RELATION_TYPES);
@@ -104,6 +104,8 @@ export class ModalComponent implements OnInit {
   }
 
   onDayChange(event: Event) {
+    console.log('day value: ', this.dependentForm.controls.day.value);
+    /*
     console.log('self day: ', this.dependentForm.controls.day.value);
     console.log(
       'dependent day: ',
@@ -123,6 +125,7 @@ export class ModalComponent implements OnInit {
     } else {
       this.enableSlots = false;
     }
+    */
   }
 
   onSlotChange(event: Event) {

@@ -60,13 +60,13 @@ export enum SCHEDULE_GROUP_TYPES {
 }
 
 export enum SCHEDULE_DAY_TYPES {
-  DAY_1 = '04-June-2021',
-  DAY_2 = '05-June-2021'
+  DAY_1 = 'Same Day',
+  DAY_2 = 'Different Day'
 }
 
 export enum SCHEDULE_SLOT_TYPES {
-  SAME_SLOT = 'Same as Employee Slot',
-  DIFF_SLOT = 'Different from Employee Slot'
+  SAME_SLOT = 'Same Session',
+  DIFF_SLOT = 'Different Session'
 }
 
 /* sample JSONs */
