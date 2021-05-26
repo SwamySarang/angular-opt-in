@@ -7,6 +7,7 @@ export interface Person {
   location?: string;
   vxnType?: VXN_TYPES;
   dose?: DOSE_TYPES;
+  dose2Before?: Date;
   locationType?: VXN_LOCATION_PREFERENCE;
   day: SCHEDULE_DAY_TYPES;
   slot: SCHEDULE_SLOT_TYPES;

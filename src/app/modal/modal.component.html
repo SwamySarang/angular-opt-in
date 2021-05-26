@@ -65,7 +65,7 @@
           </div>
         </div>
         <div class="row g-1">
-          <div class="col-2">
+          <div class="col-4">
             <div class="p-0 m-1 border bg-light">
               <label>Vaccine Preference</label>
               <select
@@ -80,7 +80,7 @@
               </select>
             </div>
           </div>
-          <div class="col-2">
+          <div class="col-4">
             <div class="p-0 m-1 border bg-light">
               <label>Dose:</label>
               <select
@@ -95,16 +95,22 @@
               </select>
             </div>
           </div>
-          <div class="col-2">
-            <label>Dose 2 Before:</label>
-            <input type="text" width="5"
-                    class="form-control"
-                    bsDatepicker
-                    [bsValue]="scheduleDate"
-                    [bsConfig]="datePickerOptions"
-                    (bsValueChange)="onDose2BeforeChange($event)">
+          <div class="col-4">
+            <div class="p-0 m-1 border bg-light">
+              <div *ngIf="displayDose2BeforeDatePicker">
+                <label>Last Date to take Dose 2:</label>
+                <input type="text" width="5"
+                  class="form-control"
+                  bsDatepicker
+                  [bsValue]="scheduleDate"
+                  [bsConfig]="datePickerOptions"
+                  (bsValueChange)="onDose2BeforeChange($event)">
+              </div>
+            </div>
           </div>
-          <div class="col-3">
+        </div>
+        <div class="row g-1">
+          <div class="col-6">
             <div class="p-0 m-1 border bg-light">
               <label>Day:</label>
               <select id="dayId" formControlName="day" (change)="onDayChange($event)">
@@ -115,10 +121,10 @@
               </select>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-6">
             <div class="p-0 m-1 border bg-light">
               <label>Session:</label>
-              <select id="slotId" class="p-0 m-2" formControlName="slot" *ngIf="enableSlots" (change)="onSlotChange($event)">>
+              <select id="slotId" formControlName="slot" *ngIf="enableSlots" (change)="onSlotChange($event)">>
                 <option value="Select">Select</option>
                 <option [value]="slot" *ngFor="let slot of slots"
                   >{{ slot }}</option

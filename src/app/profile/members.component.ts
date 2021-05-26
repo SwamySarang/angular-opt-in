@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Employee, Member, RELATION_TYPES } from './../employees';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ModalComponent } from '../modal/modal.component';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-profile-members',
@@ -14,10 +14,13 @@ export class MembersComponent implements OnInit {
 
   // fontawesome icons
   faTrash = faTrashAlt;
+  faEdit = faEdit;
 
   membersLength?: number;
   isCollapsed = false;
   bsModalRef?: BsModalRef;
+
+  scheduelCOnfirmed = false;
 
   constructor(private modalService: BsModalService) {}
 
@@ -105,5 +108,10 @@ export class MembersComponent implements OnInit {
     //   this.confirmNew =  '';
     //   console.log("inside timeout ", this.newlyAdded);
     // }, 500);
+  }
+
+  submitForScheduling() {
+    console.log("submitted for scheduling");
+    this.scheduelCOnfirmed = false;
   }
 }

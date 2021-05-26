@@ -7,18 +7,18 @@
       aria-controls="collapseMembers"
     >
       Dependents
-      <span class="badge bg-primary">{{ membersLength }}</span>
+      <span class="badge bg-primary">{{ employee.members.length }}</span>
     </button>
     <button
       class="m-1 btn btn-secondary"
       *ngIf="!isCollapsed"
-      (click)="addDependent()"
+      (click)="addDependent()" [disabled]="scheduelCOnfirmed"
     >
       Add Dependent
     </button>
   </div>
   <div class="card-body" [collapse]="isCollapsed" id="collapseMembers">
-    <div class="card-header" *ngIf="membersLength > 0">
+    <div class="card-header" *ngIf="employee.members.length > 0">
       <div class="row">
         <div class="col-2">
           <div class="p-0 m-1">
@@ -30,12 +30,12 @@
             <label>Name</label>
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-1">
           <div class="p-0 m-1">
             <label>Vaccine</label>
           </div>
         </div>
-        <div class="col-1">
+        <div class="col-2">
           <div class="p-0 m-1">
             <label>Dose</label>
           </div>
@@ -47,18 +47,18 @@
         </div>
         <div class="col-2">
           <div class="p-0 m-1">
-            <label>Slot</label>
+            <label>Session</label>
           </div>
         </div>
         <div class="col-1">
           <div class="p-0 m-1">
-            <label>Delete</label>
+            <label>Actions</label>
           </div>
         </div>
       </div>
     </div>
     <div *ngFor="let member of employee.members; let i = index">
-      <div class="row g-1" (click)="editDependent($event, i)">
+      <div class="row g-1">
         <div class="col-2">
           <div class="p-0 m-1 border bg-light">
             <span
@@ -73,14 +73,15 @@
             </span>
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-1">
           <div class="p-0 m-1 border bg-light">
             <span>{{ member.vxnType}}</span>
           </div>
         </div>
-        <div class="col-1">
+        <div class="col-2">
           <div class="p-0 m-1 border bg-light">
             <span>{{ member.dose}}</span>
+            <span class="p-0 m-1" *ngIf="member.dose === 'Dose 2'">({{ member.dose2Before | date: shortDate}})</span>
           </div>
         </div>
         <div class="col-2">
@@ -95,7 +96,10 @@
         </div>
         <div class="col-1">
           <div class="p-0 m-1 border bg-light">
-            <span (click)="deleteDependent($event, i)">
+            <span class="p-1 m-1" (click)="editDependent($event, i)">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </span>
+            <span class="p-1 m-1" (click)="deleteDependent($event, i)">
               <fa-icon [icon]="faTrash"></fa-icon>
             </span>
           </div>
@@ -104,4 +108,12 @@
     </div>
   </div>
 </div>
-<div></div>
+<div class="card">
+  <div class="card-header">
+    <button class="float-right"
+      class="btn btn-secondary" (click)="submitForScheduling()" [disabled]="scheduelCOnfirmed"
+    >
+      Submit for Scheduling
+    </button>
+  </div>
+</div>

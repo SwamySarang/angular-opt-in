@@ -25,6 +25,7 @@ export class ModalComponent implements OnInit {
   @Input() empRegisteredDay?: string;
 
   public event: EventEmitter<Member> = new EventEmitter();
+  displayDose2BeforeDatePicker = false;
   enableSlots: boolean = true;
 
   // list of values for the select elements (vaccine preference and vaccine location preference
@@ -49,6 +50,16 @@ export class ModalComponent implements OnInit {
     slot: new FormControl('Select', Validators.required)
   });
 
+  scheduleDate = new Date();
+
+  datePickerOptions = {
+    dateInputFormat: 'MM/DD/YYYY',
+    minDate: new Date(),
+    containerClass: 'theme-blue',
+    isAnimated: true,
+    adaptivePosition: true
+  };
+
   constructor(private bsModalRef: BsModalRef) {}
 
   ngOnInit() {
@@ -70,6 +81,11 @@ export class ModalComponent implements OnInit {
         this.dependentForm.controls.dose.setValue(this.member.dose);
         this.dependentForm.controls.day.setValue(this.member.day);
         this.dependentForm.controls.slot.setValue(this.member.slot);
+
+        if (this.member.dose2Before) {
+          this.scheduleDate = this.member.dose2Before;
+          this.displayDose2BeforeDatePicker = true;
+        }
       }
     }
   }
@@ -97,10 +113,12 @@ export class ModalComponent implements OnInit {
   }
 
   onDoseChange(event: Event) {
-    // console.log(
-    //   'this.locationType ',
-    //   this.dependentForm.controls.locationType.value
-    // );
+    console.log('this.dose ', this.dependentForm.controls.dose.value);
+    if (this.dependentForm.controls.dose.value === DOSE_TYPES.DOSE_2) {
+      this.displayDose2BeforeDatePicker = true;
+    } else {
+      this.displayDose2BeforeDatePicker = false;
+    }
   }
 
   onDayChange(event: Event) {
@@ -135,6 +153,22 @@ export class ModalComponent implements OnInit {
     // );
   }
 
+  onDose2BeforeChange(event: Event) {
+    console.log(
+      'onDose2BeforeChange changed ',
+      event,
+      ', type ',
+      typeof event,
+      ', returnValue ',
+      event.returnValue
+    );
+    console.log('event.target ', event.target);
+
+    if (event) {
+      //this.scheduleDate = new Date(event.returnValue);
+    }
+  }
+
   onDependentSubmit(event: Event) {
     // console.log(this.dependentForm, this.dependentForm.value);
     this.bsModalRef.hide();
@@ -154,10 +188,12 @@ export class ModalComponent implements OnInit {
           ? dependentFormValue.vxnType
           : '',
       dose: dependentFormValue.dose !== 'Select' ? dependentFormValue.dose : '',
+      dose2Before: this.scheduleDate,
       day: dependentFormValue.day !== 'Select' ? dependentFormValue.day : '',
       slot: dependentFormValue.slot !== 'Select' ? dependentFormValue.slot : ''
     };
 
+    console.log(member);
     return member;
   }
 }
